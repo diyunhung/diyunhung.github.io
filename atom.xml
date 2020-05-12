@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>DD</title>
+  <title>《DD 非常日記》</title>
   
-  
+  <subtitle>筆記 x 日常</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://diyunhung.github.io/"/>
   <updated>2020-05-12T05:36:55.552Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://diyunhung.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>DD</name>
     
   </author>
   
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2020/05/12/hello-world/"/>
-    <id>http://yoursite.com/2020/05/12/hello-world/</id>
+    <link href="https://diyunhung.github.io/2020/05/12/hello-world/"/>
+    <id>https://diyunhung.github.io/2020/05/12/hello-world/</id>
     <published>2020-05-12T05:36:55.552Z</published>
     <updated>2020-05-12T05:36:55.552Z</updated>
     
