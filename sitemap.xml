@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://diyunhung.github.io/categories/index.html</loc>
+    
+    <lastmod>2020-05-16T07:57:14.715Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://diyunhung.github.io/tags/index.html</loc>
+    
+    <lastmod>2020-05-16T07:56:36.342Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://diyunhung.github.io/2020/05/12/hello-world/</loc>
     
     <lastmod>2020-05-12T05:36:55.552Z</lastmod>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>筆記 x 日常</title>
+  <title>《DD 非常日記》</title>
   
-  <subtitle>《DD 非常日記》</subtitle>
+  <subtitle>筆記 x 日常</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://diyunhung.github.io/"/>
