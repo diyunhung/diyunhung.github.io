@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 《DD 非常日記》
-subtitle: 筆記 x 日常
+title: 筆記 x 日常
+subtitle: 《DD 非常日記》
 description: DD's 分享部落格
 author: DD
 language: zh-tw
@@ -101,26 +101,30 @@ deploy:
   repo: https://github.com/diyunhung/diyunhung.github.io.git
   branch: master
 
-
+# introduction  in the banner header
+subtitle_desc: 日常學習與非常日記
 
 # your blog favicon icon, support two ways: local and online. the local way need you to put the icon under  themes/hexo-theme-skapp/source/img directory
-favicon_ico: https://blog.static.minfive.com/other/favicon.ico
+favicon_ico: https://ca.slack-edge.com/T04NQNSUB-USA2U1SFP-e94a72abd9c0-512
 
 # blog logo icon in the upper left corner. support the local way and online way. 
-logo: http://oo12ugek5.bkt.clouddn.com/images/logo-text-white.png
+logo: https://ca.slack-edge.com/T04NQNSUB-USA2U1SFP-e94a72abd9c0-512
 
 # avatar
 avatar: http://oo12ugek5.bkt.clouddn.com/images/qrcode.png
 # qrcode: http://oo12ugek5.bkt.clouddn.com/images/qrcode.png
 
 # page default cover
-default_cover: http://oo12ugek5.bkt.clouddn.com/images/default_cover.png
+default_cover: https://ca.slack-edge.com/T04NQNSUB-USA2U1SFP-e94a72abd9c0-512
 
 # header background picture
-header_cover: https://blog.static.minfive.com/other/banner-bg.jpg
+header_cover: https://i.imgur.com/Uh0Kukb.jpg
 
 # 404 page background picture
 error_page_bg: https://blog.static.minfive.com/other/dogs.jpg
 
 # page loading icon
 loader_img: https://blog.static.minfive.com/other/loader.gif
+
+# self introduction
+introduction: Keep Going
