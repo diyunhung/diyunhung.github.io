@@ -1,0 +1,614 @@
+---
+title: 初探JS
+date: 2020-04-21 17:00:00
+tags:
+- javascript
+categories:
+- [JS新手村]
+---
+
+此篇是從0開始的JS新手，以閱讀[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)上的javascript開始
+
+### 什麼是JavaScript
+
+跨平台、物件導向。
+dynamically typed language（動態型別語言）
+
+
+### 使用“use strict”做嚴謹的開發
+
+```
+(function(){
+    "use strict";
+    
+    function greetMe(yourName){
+        alert('Hello'+ yourName);
+    }
+    
+    greetMe('world');
+})()
+```
+
+在每段程式碼前加上
+```
+(function(){"use strict"; 
+```
+在每段程式碼後加上
+```
+})()
+```
+這樣做可以
+1. 大幅度地提升性能
+2. 預防愚蠢的語意阻礙初心者 //很直白的說明
+3. Prevent code snippets executed in the console from interacting with one-another (e.g., having something created in one console execution being used for a different console execution). （預防重複執行同一片段？）
+
+
+也可以對單一function內寫‘use strict’
+
+```
+(function () {
+  'use strict';
+  dd = 'xinxingKnightly';
+  // Uncaught ReferenceError: auntie is not defined
+})();
+```
+* 需要放在函式的開頭才有作用
+
+
+> 卡斯伯-JavaScript 的嚴格模式 "use strict" 
+> https://wcc723.github.io/javascript/2017/12/15/javascript-use-strict/
+
+
+## 基礎知識
+
+* JS語法借鑑於JAVA, C, C++,也被Awk, Perl, Python影響
+* Case-sensitive，區分大小寫，試大小寫為不同的值
+* 使用Unicode符號皆可被使用
+* 每行指令稱為“statements”，並使用分號（semicolons）隔開
+* 若只有一行指令，分號非必須。但有超過一行的指令，就必須使用分號隔開
+* JS腳本由左往右掃描，並轉換成sequence of input elements像令牌（Token）、控制字符（Control characters）、換行器（line terminators）、註解（Comments）或是空白（Withespace）
+
+
+## Comments 註解
+
+```
+// a one line comment
+ 
+/* this is a longer, 
+ * multi-line comment
+ */
+```
+
+* `#!/usr/bin/env node.` 稱作 hashbang comment，標註應執行的JS引擎路徑
+
+## Declarations 宣告
+
+JavaScipt有三種宣告方式：
+
+`var`
+    宣告一個可任意給予一個初始值的變數
+
+`let`
+    宣告一個在Block-scoped(範圍)、local variable(本地變數),可任意給予一個初始值的變數
+
+`const`
+    宣告一個在Block-scoped(區塊範圍),read-only named constant(唯讀的常數)，不能重新賦值
+
+* "="為賦值的動作
+* 有宣告行為但沒有賦值，該變數為undefined
+```
+var car;
+console.log(car);
+//print undefined
+```
+    
+
+
+### Variables 變數
+
+* 使用語意化的命名
+* 開頭為letter(字母)、underscore(＿)、dollar sign($)，接續的字符可為數字
+* 大小寫區分，視為不同值
+* 不能取JS中的保留字
+* 駝峰式`var carType = nissan`，下底線式`var car_type = nissan`
+
+```
+var a1 = "lowerCase";
+var A1 = "upperCase";
+console.log(a1,A1);
+//print> lowerCase upperCase
+```
+
+### Declaring Variables 宣告變數
+兩種方法：
+
+* `var`
+`var x = 42`
+宣告一個可用於local及global變數，取決於execution context（執行的上下文）
+
+* `const` or `let`
+`ley y = 13`
+宣告一個block-scope local variable.(區塊裡的區域變數)
+
+* 不鼓勵的宣告(當作不是一種方式) 
+`x = 87`
+創造一個undeclared global variable。JS也會提出警示
+
+### Evaluating variables 變數取值
+
+#### Undefine 及 ReferenceError
+
+如果宣告一個變數時沒有“賦值”，此變數的值為“undefined”
+如果要取得一個沒有宣告的變數，有跳出“ReferenceError”
+
+![](https://i.imgur.com/bBvemEq.png)
+
+Tips:可以利用判斷變數的值是否為undefined來執行程式
+```
+var input;
+if (input === undefined) {
+    doThis(); //此時If為true
+}
+else{
+    doThat();
+}
+```
+
+* undefined在布林判斷下為“false”
+
+```
+var myArray = [];
+if (!myArray[0]) 
+myFunction(); 
+//會執行Myfunction
+```
+
+* undefined在數字運算上會判斷為NaN(Not a Number)
+```
+var a;
+a + 2 //Evaluates to NaN
+```
+
+#### Null
+
+如果宣告一個變數為null `var a = null`
+null在運算上為0,布林判斷為false
+```
+var n = null
+console.log(n * 32);  // print 0
+```
+
+#### ++及 -- 運算子
+
+`a=a+1` = `a+=1` = `a++`
+!注意
+```
+var a = 0;
+console.log(a++ && 30);  //print 0
+```
+因為會判斷為：
+```
+console.log(a && 30); //print 0
+a++;
+```
+若改寫
+```
+console.log(++a && 30) //print 30
+```
+
+`a=a-1` = `a-=1` = `a--`
+
+
+### Varialble scope 變數區塊 / 變數範圍
+
+#### Global variable 全域變數
+在function外宣告的變數，當前文件的code皆可以使用 `var`
+
+```
+if(true){
+    var x = 5;
+}
+
+console.log(x)   //print 5
+```
+
+#### Local variable 區域變數
+在function內宣告的變數，此能在該function內使用 `let` `const`
+```
+if(true){
+    let y = 10;
+}
+console.log(y) // print "ReferenceError: y is not defined"
+```
+
+### Variable hoisting 變數提升
+JS有別於一個般的概念“Hoisting”，可以讓“Variables(變數)”不一定要在程式最前方,
+但被提升的已賦值變數的值為“undefined”
+* 讓宣告變數寫在要使用的function上方．讓code更易讀
+* 僅以`var`宣告的變數在hoisting後其值為undefined
+* `let`及`const`宣告的變數無法被hoisting，會被判斷“ReferenceError”，會在ES6上定義的Temporal Dead Zone（TDZ暫時死亡區域）
+```
+console.log(x);
+let x =1;  //Uncaught ReferenceError: x is not defined
+```
+### (補充資料) 
+```
+typeof a; // undefined
+typeof b; // ReferenceError! (TDZ)
+let b;
+```
+> https://cythilya.github.io/2018/11/05/syntax/
+
+
+### Function hoisting 函式提升
+
+* 函示宣告式（function declaration）被提升
+```
+foo();  // "bar"
+function foo(){
+    console.log('bar');
+}
+```
+
+* 函示表示式（function Expressions）不會被提升
+```
+baz();  //TypeError:baz is not a function
+var baz = function(){
+    console.log('bar2');
+};
+```
+
+### Global variables 全域變數
+
+Global variables（全域變數）是global object（全域物件）的properties（屬性值）。
+
+在網頁下，global object就是wondows，可以用
+`window.varialbe`來設定及存取global variables
+可以指定`window`和`frame`物件來存取另個window和frame所宣告的全域變數
+ex. parent.phoneNumber
+
+### Constants 常數
+
+使用`const`來命常數
+* 程式執行時，常數不能透過賦值或重新宣告改變值
+* 常數需被初始化
+* 在同一個區塊中，使用const宣告的變數無法同時用在function和variable
+* 對於object，const的機制會被打破（？暫時想不到這好的說法）
+```
+const myObject = {'key':'value'};
+myObject.key = 'otherValue'
+//print "otherValue"
+```
+* array同object
+```
+const myArray = ["html","css"];
+myArray.push("JS");
+console.log(myArray);
+//print ["html", "css", "JS"]
+```
+
+## Data structures and types 資料架構及型別
+
+### Data types資料型別
+七種原生型別
+1. Boolean: `true` and `false`.
+2. null: !=NULL
+3. undefined
+4. Number:整數-2^(253 -1) and 2^(253 -1) 之間的數字）或floating point number(浮點數)
+5. Bigint:任意精度表示整數，使用bigint可以安全的儲存和運行大整數，ex.`9007199254740992n`
+6. String:連續的字符組成的字串
+7. Symbol: 生成一個唯一的值 
+> Symbol更多參考https://zhuanlan.zhihu.com/p/22652486
+>
+及
+Object：Array(陣列)、{}(物件)
+
+objects(物件)可以想像成被命名過且用來裝數值的容器
+function(函數)為應用程式所執行的步驟
+
+### Data type conversion 資料型別轉換
+
+JavaScriptg是dynamically typed language（動態型別語言）：宣告變數時不用特地定義該值的資料型別，即程式自動轉譯
+
+### Number and the '+' operator 數字及‘＋’
+
+在expression中數字及字串使用'+'做串接時，會將數字轉為字串
+
+```
+'37'-7  // print 30
+'37'+4  // print "374"
+```
+
+### Converting strings to number 轉換字串為數字
+
+轉為字串：`parseInt()` 
+語法：parseInt(string, radix)
+radix為進制 `parseInt(100,2)` 表示用二進制解讀100,得出4
+
+轉為浮點數：`parseFloat()`
+
+方法二為是使用 `+`
+```
+'1.1'+'1.1' //print "1.11.1"
+(+1.1)+(+1.1) //print 2.2
+```
+## Literals 字面值
+
+在JS中固定不可變動的值。
+
+* Array literals
+* Boolean literals
+* Floating-point literals
+* Numeric literals
+* Object literals
+* RegExp literals
+* String literals
+
+### Array literals 陣列/組數
+
+使用"[]"做為陣列起手式
+```
+let coffees = ["frech roast","colombian","kons"]
+```
+
+#### Extra commas in array literals 多餘的逗點
+
+沒有值得逗點會被賦undefined
+```
+let fish = ["Lion",,"Angel"];
+```
+fish[0] = Lion
+fish[1] = undefined
+fish[2] = Angel
+
+注意！
+```
+let drink = ["coke","coffee",] 
+```
+如果只有一個逗點會被忽略
+
+```
+let drink = ["coke","coffee",,] 
+```
+==兩個逗點的值才會是undefined==
+
+### Boolean literals 布林值
+
+boolean有兩個literal值: `true` `false`
+
+The Boolean object is a wrapper around the primitive Boolean data type. 
+
+### Numeric literals 數字
+
+Number跟BigInt可用decimal(10進制)、hexadecimal(16進制)、octal(8進制)、binary(2進制)來表達
+
+* 10進制為字首不為0的連續數字
+* 字首為0或0o(0O)為8進制，數字為（0-7）
+* 字首為0x(0X)為16進制，（0-9）(a-f/A-F)
+    Ex.`0xa`=`0xA`=`10`、`0xf`=`0xF`=`15`
+* 字首為0b(0B)為2進制，（0-1）
+
+```
+0, 117 , -345, 194797894n //decimal,10進制
+015, 0001, -0o77 , 0o827972937n // octal,8進制
+0x123, 0x00111, -0x837975, 0x72648849n // hexadecimal,16進制
+0b11, 0b0011, -0b11 , 0b101010111100n //binary,2進制
+```
+
+### Floating-point literals
+
+* 可為正(+)、負數(-)
+* 有'.'
+* 需要至少一個正數，或有一個‘e/E’ 
+* 浮點誤差，兩個有小數點的值相加會有小誤差
+
+語法
+```
+[(+|-)][正數].[正數][e|E[(+|-)]正數]
+```
+Example
+```
+3.1415926
+-.1234567
+-3.1E+12
+.1e-23
+```
+
+### Object literals
+
+由 =={ }== 組成
+不可使用Object literal都做首行程式碼，會導致出錯，因為"{"會解讀成起始的block
+
+```
+var sales = "Toyota";
+
+function carTypes(name){
+    if (name === 'Honda'){
+        return name;
+    }else{
+        return "Sorry, we don't sell" + name + ".";
+    }
+}
+
+var car = {myCar:"Satrun", getCar:carTypes('Honda'),special:sales};
+
+console.log(car.myCar); //Saturn
+console.log(car.getCar); //Honda
+console.log(car.special); //Toyota
+```
+在`car`object中，第一個屬性為`myCar`並賦值字串`"Saturn"`
+第二個屬性`getCar`其值為function`carTypes("Honda")`
+第三個屬性`specail`其值為變數`sales`
+
+#### 取值方式
+```
+var peter = {
+    name : "peter",
+    score : 100,
+    phone : "0988-123-456"
+}
+
+//兩種寫法都可以
+console.log(peter['score']);  //print 100 
+console.log(peter.score);  //print 100
+```
+
+===
+
+```
+var car = {manyCars:{a:'Saab',b:'Jeep'},7:'Mazda'};
+console.log(car.manyCars.b)  // print Jeep
+console.log(car[7]);  // print Mazda
+```
+* 物件的屬性名稱可以是任何字串及數字（也可以是空字串）
+！注意：如果不是JS規範中的Identifier(Unicode letter,$,_,digits(0-9))則必須用引號（“”/‘’）標示
+==不符屬性名稱==或是==數字==不能透過`.`(dot)取值,但可以用`[]`取值
+==``[“”]``== 的用法可以穩定取值
+
+```
+var unusualPropertyNames = {
+  '': 'An empty string',
+  '!': 'Bang!'
+}
+```
+![](https://i.imgur.com/MD2Vuun.png)
+
+#### Enhanced Object literals 增強用法
+
+> 這篇很讚：https://ithelp.ithome.com.tw/articles/10208316
+
+In ES2015/ES6:
+可以使用`foo`的簡寫方式，等於 `foo:foo`
+
+==ES5==
+```
+var x = 1, y = 2;
+var object = {
+    x:x,
+    y:y
+};
+
+console.log(object.x); //print 1
+```
+
+==ES6==
+```
+var x = 1, y = 2;
+var object = {
+    x,
+    y
+};
+
+console.log(object.x);  //print 1
+```
+
+> 來源：https://subscription.packtpub.com/book/web_development/9781785884443/1/ch01lvl1sec15/the-enhanced-object-literals
+
+```
+var obj ={
+    __proto__:theProtoObj,
+    handler,   // 等於handler:handler
+    toString(){
+    //Super calls
+    return 'd' + super.toString();
+    }
+    //Computed(dynamic)property names
+    ['prop' + (()=>42)()]:42
+}.
+```
+
+```
+var foo = {a: "alpha", 2: "two"};
+console.log(foo.a);    // alpha
+console.log(foo[2]);   // two
+//console.log(foo.2);  // SyntaxError: missing ) after argument list
+//console.log(foo[a]); // ReferenceError: a is not defined
+console.log(foo["a"]); // alpha
+console.log(foo["2"]); // two
+```
+### RegExp literals 正規表達式
+
+使用`/foo/` 斜括弧表示
+```
+var re = /ab+c/;
+```
+
+### String literals 字串
+
+是Zero或多個符號（characters）使用`""`或`''`表示
+
+```
+'foo'
+"foo"
+'1234'
+"DD cheer up"
+```
+
+`string.length`可以判讀字串長度(含空白格)
+`console.log("DD cheer up!".length)  // print 12`
+
+#### Template literals 
+
+使用 (back-tick) （數字鍵1旁邊的鍵）`  ` 來包住
+提供syntactic sugar(語法糖)來建構字串， similar to string interpolation
+
+```
+// String interpolation
+var name = 'Bob', time = 'today';
+`Hello ${name}, how are you ${time}?`
+```
+
+#### using special characters in strings
+
+詳見[MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_Types)
+
+
+#### Escaping characters 避免字符
+
+* 不建議使用
+如果要在“”內在用“”，必須插入"\"
+```
+var quote = "He read \"The Cremation of Sam McGee\" by R.W. Service. "; 
+console.log(quote)
+
+//print He read "The Cremation of Sam McGee" by R.W. Service.
+```
+
+若要加入“\”本身這個字符，可以使用
+```
+var home = 'c:\\temp';
+console.log(home);  // print c:\temp
+```
+
+若沒有加則會
+```
+var home = 'c:\temp';
+console.log(home);   //print c:	emp
+```
+
+
+若撰寫程式碼需換行可以加入`\`，讓換行之間可以延續不出錯
+```
+var str = ' this string \
+is broken \
+across multiple \
+lines.'
+
+console.log(str) //pring this string is broken across multiple line
+```
+沒打斜槓就會print Uncaught SyntaxError: Invalid or unexpected token
+
+若想換行但不使用`\`，可以把引號改為(back-tick) （數字鍵1旁邊的鍵）而不出錯
+```
+var poem = 
+`Roses are red, 
+Violets are blue. 
+Sugar is sweet, 
+and so is foo.` 
+```
+
+
+
+
+
+
