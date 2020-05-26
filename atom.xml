@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://diyunhung.github.io/"/>
-  <updated>2020-05-25T13:53:36.952Z</updated>
+  <updated>2020-05-26T15:47:36.326Z</updated>
   <id>https://diyunhung.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git remote 推上遠端伺服器</title>
+    <link href="https://diyunhung.github.io/2020/05/26/20200526/"/>
+    <id>https://diyunhung.github.io/2020/05/26/20200526/</id>
+    <published>2020-05-26T15:40:00.000Z</published>
+    <updated>2020-05-26T15:47:36.326Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="git-remote-推上遠端伺服器"><a class="header-anchor" href="#git-remote-推上遠端伺服器"></a>git remote 推上遠端伺服器</h1><p>一個git專案建立完成，並有<code>git commit</code>後，<br>要將自己電腦上的東西推上遠端的Git伺服器。</p><ol><li>設立遠端節點</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;語法</span><br><span class="line">git remote add &lt;name&gt; &lt;url&gt;</span><br><span class="line">&#x2F;&#x2F;範例</span><br><span class="line">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;diyunhung&#x2F;git_test.git</span><br></pre></td></tr></table></figure><p><code>&lt;name&gt;</code>:代名詞，慣例上叫<code>origin</code>，如果是從Server上clone下來的，預設就是叫<code>origin</code><br><code>&lt;url&gt;</code>:git 伺服器上專案的位置</p><ol start="2"><li>將本機的東西推上去</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;語法</span><br><span class="line">git push  [-u | --set-upstream] </span><br><span class="line">&#x2F;&#x2F;範例一</span><br><span class="line">git push -u origin master </span><br><span class="line">&#x2F;&#x2F;範例二</span><br><span class="line">git push -u goodideas DD</span><br></pre></td></tr></table></figure><p>範例一：</p><ol><li>把本地端分支名為<code>master</code>上的內容，指向<code>origin</code>的位置</li><li>在<code>origin</code>的遠端Server上，如果<code>master</code>不存在，就在遠端Server上建立<code>master</code>同名分支</li><li>如果Server上存在<code>master</code>分支，便會移動Server上<code>master</code>分支的位置，指向目前最新的進度</li><li>設定upstream，可以簡寫為<code>-u</code>，每個分支可設定一個，指向並追蹤該分支</li><li>設定過upstream後，下次可以直接執行<code>git push</code>將資料推上去，若沒有設定，則每次都要打完<code>git push origin master</code></li></ol><p>範例二：<br>把本機<code>DD</code>分支推上<code>goodideas</code>的遠端節點所代表的位置，並在遠端Server建立或更新名為<code>DD</code>的分支</p><h2 id="更多關於git-remote"><a class="header-anchor" href="#更多關於git-remote"></a>更多關於git remote</h2><p>顯示遠端節點名稱及url位置：<br><code>git remote -v</code></p><p>重新命名遠端節點的名稱：<br><code>git remote rename &lt;old&gt;&lt;new&gt;</code></p><p>刪除指定名稱的遠端節點：<br><code>git remote remove &lt;name&gt;</code></p><h2 id="來源"><a class="header-anchor" href="#來源"></a>來源</h2><p><a href="https://gitbook.tw/chapters/github/push-to-github.html" target="_blank" rel="noopener">Git教學：如何 Push 上傳到 GitHub？</a><br><a href="https://stackoverflow.com/questions/5617211/what-is-git-remote-add-and-git-push-origin-master" target="_blank" rel="noopener">What is “git remote add …” and “git push origin master”?</a><br><a href="https://git-scm.com/docs/git-remote" target="_blank" rel="noopener">git Documentation</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;git-remote-推上遠端伺服器&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#git-remote-推上遠端伺服器&quot;&gt;&lt;/a&gt;git remote 推上遠端伺服器&lt;/h1&gt;
+&lt;p&gt;一個git專案建立完成，並有&lt;code&gt;git commi
+      
+    
+    </summary>
+    
+    
+      <category term="git實作筆記" scheme="https://diyunhung.github.io/categories/git%E5%AF%A6%E4%BD%9C%E7%AD%86%E8%A8%98/"/>
+    
+    
+      <category term="git" scheme="https://diyunhung.github.io/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>忍者 Chapter2. 在執行時期產生網頁</title>
